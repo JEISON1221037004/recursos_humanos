@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('posición');
+            $table->foreignId('departamento_id')->constrained('departamentos');
+            $table->date('fecha_contratación');
+            $table->decimal('salario', 8, 2);
             $table->timestamps();
         });
     }
