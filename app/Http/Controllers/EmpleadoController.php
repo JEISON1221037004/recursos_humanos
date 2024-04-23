@@ -11,7 +11,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+        $empleados = Empleado::all();
+        return view('empleados.index', compact('empleados'));
     }
 
     /**
@@ -19,7 +20,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('empleados.new');
     }
 
     /**
@@ -27,7 +28,16 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'posición' => 'required',
+            'departamento_id' => 'required|exists:departamentos,id',
+            'fecha_contratación' => 'required|date',
+            'salario' => 'required|numeric'
+        ]);
+        Empleado::create($request->all());
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -41,24 +51,26 @@ class EmpleadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Empleado $empleado)
     {
-        //
+        return view('empleados.edit', compact('empleado'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Empleado $empleado)
     {
-        //
+        $empleado->update($request->all());
+        return redirect()->route('empleados.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Empleado $empleado)
     {
-        //
+        $empleado->delete();
+        return redirect()->route('empleados.index');
     }
 }
