@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
@@ -11,7 +12,8 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        $departamentos = Departamento::all();
+        return view('departamentos.index', compact('departamentos'));
     }
 
     /**
@@ -19,7 +21,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('departamentos.new');
     }
 
     /**
@@ -27,7 +29,13 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'ubicación' => 'required',
+            'número_telefono' => 'required'
+        ]);
+        Departamento::create($request->all());
+        return redirect()->route('departamentos.index');
     }
 
     /**
@@ -41,24 +49,26 @@ class DepartamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Departamento $departamento)
     {
-        //
+        return view('departamentos.edit', compact('departamento'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Departamento $departamento)
     {
-        //
+        $departamento->update($request->all());
+        return redirect()->route('departamentos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Departamento $departamento)
     {
-        //
+        $departamento->delete();
+        return redirect()->route('departamentos.index');
     }
 }
