@@ -17,6 +17,18 @@
                     </x-nav-link>
                 </div>
             </div>
+            <!-- Añadir nuevos enlaces aquí -->
+                <x-nav-link :href="route('empleados.index')" :active="request()->routeIs('empleados.*')">
+                    {{ __('Empleados') }}
+                </x-nav-link>
+                <x-nav-link :href="route('departamentos.index')" :active="request()->routeIs('departamentos.*')">
+                    {{ __('Departamentos') }}
+                </x-nav-link>
+                <x-nav-link :href="route('asistencias.index')" :active="request()->routeIs('asistencias.*')">
+                    {{ __('Asistencias') }}
+                </x-nav-link>
+
+                
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
