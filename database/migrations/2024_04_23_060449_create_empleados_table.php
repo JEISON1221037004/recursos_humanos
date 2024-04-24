@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('posición');
             $table->foreignId('departamento_id')->constrained('departamentos');
             $table->date('fecha_contratación');
-            $table->decimal('salario', 8, 2);
+            $table->decimal('salario', 15, 2)->change();
             $table->timestamps();
         });
     }
