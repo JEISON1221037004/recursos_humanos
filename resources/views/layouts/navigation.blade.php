@@ -28,6 +28,45 @@
                     {{ __('Asistencias') }}
                 </x-nav-link>
 
+                <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('empleados.index') }}">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('departamentos.index') }}">Departamentos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('asistencias.index') }}">Asistencias</a>
+                </li>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Authentication Links -->
+                @guest
+                    <!-- Your guest links here -->
+                @else
+                    <li class="nav-item dropdown">
+                        <!-- Your authenticated user dropdown menu here -->
+                    </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
                 
 
             <!-- Settings Dropdown -->
